@@ -78,13 +78,12 @@
 		exports.viewportTop = scrollTop();
 		exports.viewportBottom = exports.viewportTop + exports.viewportHeight;
 		exports.documentHeight = getDocumentHeight();
-		if (exports.documentHeight !== previousDocumentHeight) {
-			calculateViewportI = watchers.length;
-			while( calculateViewportI-- ) {
-				watchers[calculateViewportI].recalculateLocation();
-			}
-			previousDocumentHeight = exports.documentHeight;
+
+		calculateViewportI = watchers.length;
+		while( calculateViewportI-- ) {
+			watchers[calculateViewportI].recalculateLocation();
 		}
+		previousDocumentHeight = exports.documentHeight;
 	}
 
 	function recalculateWatchLocationsAndTrigger() {
@@ -356,7 +355,7 @@
 
 	if (isInBrowser) {
 		if (window.addEventListener) {
-			window.addEventListener('scroll', scrollMonitorListener);
+			window.addEventListener('scroll', scrollMonitorListener, true);
 			window.addEventListener('resize', debouncedRecalcuateAndTrigger);
 		} else {
 			// Old IE support
