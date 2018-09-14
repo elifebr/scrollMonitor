@@ -83,13 +83,12 @@ class ScrollMonitorContainer {
 			self.viewportTop = scrollTop(item);
 			self.viewportBottom = self.viewportTop + self.viewportHeight;
 			self.documentHeight = getContentHeight(item);
-			if (self.documentHeight !== previousDocumentHeight) {
-				calculateViewportI = self.watchers.length;
-				while( calculateViewportI-- ) {
-					self.watchers[calculateViewportI].recalculateLocation();
-				}
-				previousDocumentHeight = self.documentHeight;
+
+			calculateViewportI = self.watchers.length;
+			while( calculateViewportI-- ) {
+				self.watchers[calculateViewportI].recalculateLocation();
 			}
+			previousDocumentHeight = self.documentHeight;
 		}
 
 		var updateAndTriggerWatchersI;
